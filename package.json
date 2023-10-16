@@ -1,6 +1,6 @@
 {
   "name": "@hsync/node-red-hsync",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "put node-red online securely with a hsync server",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
     "vpn"
   ],
   "node-red": {
+    "version": ">=2.0.0",
     "nodes": {
       "hsync": "hsync.js"
     }
