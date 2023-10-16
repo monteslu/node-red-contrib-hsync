@@ -1,0 +1,39 @@
+{
+  "name": "node-red-contrib-hsync",
+  "version": "0.1.0",
+  "description": "put node-red online securely with a hsync server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/monteslu/node-red-contrib-hsync.git"
+  },
+  "keywords": [
+    "node-red",
+    "hsync",
+    "ngrok",
+    "iot",
+    "mqtt",
+    "messaging",
+    "reverse-proxy",
+    "rtc",
+    "p2p",
+    "vpn"
+  ],
+  "node-red": {
+    "nodes": {
+      "hsync": "hsync.js"
+    }
+  },
+  "author": "Luis Montes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monteslu/node-red-contrib-hsync/issues"
+  },
+  "homepage": "https://github.com/monteslu/node-red-contrib-hsync#readme",
+  "dependencies": {
+    "hsync": "^0.21.0"
+  }
+}

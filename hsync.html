@@ -1,0 +1,117 @@
+<script type="text/javascript">
+  RED.nodes.registerType('hsync-connection',{
+    category: 'config',
+    color: '#b6dbcf',
+    defaults: {
+      name: {value:""},
+      localWebPort: {value:1880,required:true,validate:RED.validators.number()},
+      localWebHost: {value:"localhost"},
+      hsyncServer: {type:"text",required:true},
+    },
+    credentials: {
+      hsyncSecret: {type:"password",required:true}
+    },
+    icon: "font-awesome/fa-exchange",
+    label: function() {
+      return this.name || this.hsyncServer || 'hsync-connection';
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="hsync-connection">
+  <div class="form-row">
+    <label for="node-config-input-hsyncServer"><i class="fa fa-tag"></i> Hsync Server</label>
+    <input type="text" id="node-config-input-hsyncServer"  placeholder="wss://somehost.exampe.com">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-hsyncSecret"><i class="fa fa-tag"></i> Hsync Secret</label>
+    <input type="password" id="node-config-input-hsyncSecret">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-localWebHost"><i class="fa fa-tag"></i> Local Web Host</label>
+    <input type="text" id="node-config-input-localWebHost">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-localWebPort"><i class="fa fa-tag"></i> Local Web Port</label>
+    <input type="text" id="node-config-input-localWebPort">
+  </div>
+  <div class="form-row">
+      <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="hsync-connection">
+  <p>A simple node that converts the message payloads into all hsync-connection characters</p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('hsync-in',{
+    category: 'network',
+    color: '#b6dbcf',
+    defaults: {
+      name: {value:""},
+      connection: {required:true, type:"hsync-connection"},
+    },
+    inputs:0,
+    outputs:1,
+    icon: "font-awesome/fa-exchange",
+    label: function() {
+      return this.name || "hsync-in";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="hsync-in">
+  <div class="form-row">
+    <label for="node-input-connection"><i class="fa fa-globe"></i> Connection</label>
+    <input type="text" id="node-input-connection">
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="hsync-in">
+  <p>A simple node that converts the message payloads into all hsync-in characters</p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('hsync-out',{
+    category: 'network',
+    color: '#b6dbcf',
+    defaults: {
+      name: {value:""},
+      host: {value:""},
+    },
+    inputs:1,
+    outputs:0,
+    align: "right",
+    icon: "font-awesome/fa-exchange",
+    label: function() {
+      let host = this.host;
+      try {
+        host = new URL(this.host).hostname;
+      } catch(e) {
+      }
+      return this.name || host;
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="hsync-out">
+  <div class="form-row">
+    <label for="node-input-host"><i class="fa fa-tag"></i> host</label>
+    <input type="text" id="node-input-host" placeholder="host">
+</div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="hsync-out">
+  <p>A simple node sends messages to other hysnc clients</p>
+</script>
+
