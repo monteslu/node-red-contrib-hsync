@@ -151,7 +151,7 @@ module.exports = function(RED) {
       try {
         host = new URL(hsync.con.hsyncServer).hostname;
       } catch (e) {}
-      node.status({fill:'green',shape:'dot',text: host + ' adsfasdf adsfasdf   \r\n <br/> asdfa  asdfa'});
+      node.status({fill:'green',shape:'dot',text: host});
     });
 
     hsync.con.on('json', (msg) => {
