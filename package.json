@@ -35,6 +35,6 @@
   },
   "homepage": "https://github.com/monteslu/node-red-contrib-hsync#readme",
   "dependencies": {
-    "hsync": "^0.21.0"
+    "hsync": "^0.23.0"
   }
 }

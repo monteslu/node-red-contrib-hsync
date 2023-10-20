@@ -17,7 +17,6 @@
     }
   });
 </script>
-
 <script type="text/html" data-template-name="hsync-connection">
   <div class="form-row">
     <label for="node-config-input-hsyncServer"><i class="fa fa-tag"></i> Hsync Server</label>
@@ -40,8 +39,35 @@
       <input type="text" id="node-config-input-name" placeholder="Name">
   </div>
 </script>
-
 <script type="text/html" data-help-name="hsync-connection">
+  <p>A simple node that converts the message payloads into all hsync-connection characters</p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('hsync-peer',{
+    category: 'config',
+    color: '#b6dbcf',
+    defaults: {
+      name: {value:""},
+      host: {value:"", required:true},
+    },
+    icon: "icons/node-red/white-globe.svg",
+    label: function() {
+      return this.name || this.host || 'hsync-peer';
+    }
+  });
+</script>
+<script type="text/html" data-template-name="hsync-peer">
+  <div class="form-row">
+    <label for="node-config-input-host"><i class="fa fa-globe"></i> Hsync Host</label>
+    <input type="text" id="node-config-input-host"  placeholder="https://somehost.exampe.com">
+  </div>
+  <div class="form-row">
+      <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+</script>
+<script type="text/html" data-help-name="hsync-peer">
   <p>A simple node that converts the message payloads into all hsync-connection characters</p>
 </script>
 
@@ -55,16 +81,15 @@
     },
     inputs:0,
     outputs:1,
-    icon: "font-awesome/fa-exchange",
+    icon: "icons/node-red/white-globe.svg",
     label: function() {
       return this.name || "hsync-in";
     }
   });
 </script>
-
 <script type="text/html" data-template-name="hsync-in">
   <div class="form-row">
-    <label for="node-input-connection"><i class="fa fa-globe"></i> Connection</label>
+    <label for="node-input-connection"><i class="fa fa-globe"></i> My Connection</label>
     <input type="text" id="node-input-connection">
   </div>
   <div class="form-row">
@@ -83,12 +108,12 @@
     color: '#b6dbcf',
     defaults: {
       name: {value:""},
-      host: {value:""},
+      peer: {required:true, type:"hsync-peer"},
     },
     inputs:1,
     outputs:0,
     align: "right",
-    icon: "font-awesome/fa-exchange",
+    icon: "icons/node-red/white-globe.svg",
     label: function() {
       let host = this.host;
       try {
@@ -99,19 +124,90 @@
     }
   });
 </script>
-
 <script type="text/html" data-template-name="hsync-out">
   <div class="form-row">
-    <label for="node-input-host"><i class="fa fa-tag"></i> host</label>
-    <input type="text" id="node-input-host" placeholder="host">
-</div>
+    <label for="node-input-peer"><i class="fa fa-globe"></i> peer</label>
+    <input type="text" id="node-input-peer" placeholder="peer">
+  </div>
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
 </script>
-
 <script type="text/html" data-help-name="hsync-out">
   <p>A simple node sends messages to other hysnc clients</p>
 </script>
 
+<script type="text/javascript">
+  RED.nodes.registerType('hs-p2p-in',{
+    category: 'network',
+    color: '#b6dbcf',
+    defaults: {
+      name: {value:""},
+      connection: {required:true, type:"hsync-connection"},
+      peer: {required:true, type:"hsync-peer"},
+    },
+    inputs:0,
+    outputs:1,
+    align: "right",
+    icon: "font-awesome/fa-exchange",
+    label: function() {
+      let host = this.host;
+      return this.name || 'hs-p2p-in';
+    }
+  });
+</script>
+<script type="text/html" data-template-name="hs-p2p-in">
+  <div class="form-row">
+    <label for="node-input-connection"><i class="fa fa-globe"></i> Connection</label>
+    <input type="text" id="node-input-connection">
+  </div>
+  <div class="form-row">
+    <label for="node-input-peer"><i class="fa fa-globe"></i> peer</label>
+    <input type="text" id="node-input-peer" placeholder="peer">
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+<script type="text/html" data-help-name="hs-p2p-in">
+  <p>A simple node sends messages to other hysnc clients</p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('hs-p2p-out',{
+    category: 'network',
+    color: '#b6dbcf',
+    defaults: {
+      name: {value:""},
+      connection: {required:true, type:"hsync-connection"},
+      peer: {required:true, type:"hsync-peer"},
+    },
+    inputs:1,
+    outputs:0,
+    align: "right",
+    icon: "font-awesome/fa-exchange",
+    label: function() {
+      let host = this.host;
+      return this.name || 'hs-p2p-out';
+    }
+  });
+</script>
+<script type="text/html" data-template-name="hs-p2p-out">
+  <div class="form-row">
+    <label for="node-input-connection"><i class="fa fa-globe"></i> Connection</label>
+    <input type="text" id="node-input-connection">
+  </div>
+  <div class="form-row">
+    <label for="node-input-peer"><i class="fa fa-globe"></i> peer</label>
+    <input type="text" id="node-input-peer" placeholder="peer">
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+<script type="text/html" data-help-name="hs-p2p-out">
+  <p>A simple node sends messages to other hysnc clients</p>
+</script>
