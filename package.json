@@ -1,6 +1,6 @@
 {
   "name": "@hsync/node-red-hsync",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "put node-red online securely with a hsync server",
   "main": "index.js",
   "scripts": {
