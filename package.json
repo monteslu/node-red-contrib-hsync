@@ -1,6 +1,6 @@
 {
   "name": "@hsync/node-red-hsync",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "put node-red online securely with a hsync server",
   "main": "index.js",
   "scripts": {
@@ -38,6 +38,6 @@
   },
   "homepage": "https://github.com/monteslu/node-red-contrib-hsync#readme",
   "dependencies": {
-    "hsync": "^0.24.0"
+    "hsync": "^0.30.2"
   }
 }
